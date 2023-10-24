@@ -22,6 +22,6 @@
      rotate(calc(var(--rotate)*-1deg))
                 translateX(calc(var(--transformX)*1px))
                 translateY(calc(var(--transformY)*1px));
-    transition: 0.1s ease-in-out;
+    transition: 0.0s ease-in-out;
 
 }

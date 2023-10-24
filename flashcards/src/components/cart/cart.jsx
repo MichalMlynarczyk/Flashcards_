@@ -37,18 +37,24 @@ export function Cart( { eng = "QUITE", pl = "CAŁKIEM",
             }}
 
             onTouchStart={(e) => {
-                setIsDragging(true); 
-                setReferencePoint(e.touches[0].clientX); 
+                e.preventDefault();
+                setIsDragging(true);
+                setReferencePointY(e.touches[0].clientY);
+                setReferencePoint(e.touches[0].clientX);
             }}
 
             onTouchMove={(e) => {
                 if(isDragging){
-                    setRotate(e.touches[0].clientX - referencePoint);
+                        e.preventDefault();
+
+                        setTransformX(e.touches[0].clientX - referencePoint);
+                        setTransformY(e.touches[0].clientY - referencePointY);
+                        setRotate(e.touches[0].clientX - referencePoint);
                 }
             }}
 
             onTouchEnd={(e) => {
-            
+
                 if(rotate > -100){
                     setRotate(0);
                 }
@@ -57,6 +63,8 @@ export function Cart( { eng = "QUITE", pl = "CAŁKIEM",
                     setRotate(0);
                 }
 
+                setTransformX(0);
+                setTransformY(0);
                 setIsDragging(false);
             }}
 
@@ -93,7 +101,7 @@ export function Cart( { eng = "QUITE", pl = "CAŁKIEM",
             style={{
                 '--test' : 'red',
                 '--scale' : scale,
-                '--rotate' : rotate/12,
+                '--rotate' : rotate/20,
                 '--transformX' : transformX,
                 '--transformY': transformY,
                 '--zindex' : zindex
