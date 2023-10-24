@@ -1,6 +1,6 @@
 .cart-container{
     width: 100%;
-    height: 70vh;
+    height: 80%;
     background: linear-gradient(to top right , #FF6F91, #FF9671, #FFC75F);
     cursor: pointer;
     display: flex;
