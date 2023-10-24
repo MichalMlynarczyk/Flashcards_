@@ -3,7 +3,7 @@ body{
   top: 0px;
   left: 0px;
         box-sizing: border-box;
-        height: -webkit-fill-available;
+        height: 100svh;
   width: 100%;
   margin: 0px;
   padding: 0px;
@@ -19,7 +19,7 @@ body{
 
 .App{
   width: 100%;
-  height: -webkit-fill-available;
+  height: 100svh;
   background-color: #f9f97186;
   font-family: Inconsolata;
   font-weight: 600;
@@ -83,16 +83,42 @@ body{
 
 .menu button{
   box-sizing: border-box;
-  border: 2px solid #FF6F91;
-  background-color: #FF9671;
-  border-radius: 10px;
+  border: 2px solid white;
+  background-color: black;
+  color: white;
+
   flex: 1;
 }
 
-/* Avoid Chrome to see Safari hack */
-@supports (-webkit-touch-callout: none) {
-  body {
-    /* The hack for Safari */
-    height: -webkit-fill-available;
-  }
+.title{
+  height: 10%;
+  background-color: black;
+  color: white;
+  font-family: Inconsolata;
+  font-weight: 800;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
 }
+
+.title span{
+  padding-left: 10px;
+}
+
+.logo{
+  animation: spin 20s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Avoid Chrome to see Safari hack */
+// @supports (-webkit-touch-callout: none) {
+//   body {
+//     /* The hack for Safari */
+//     height: -webkit-fill-available;
+//   }
+// }

@@ -1,7 +1,7 @@
 .cart-container{
     width: 100%;
     height: 80%;
-    background: linear-gradient(to top right , #FF6F91, #FF9671, #FFC75F);
+    background: linear-gradient(to top right , rgb(77, 75, 41), rgb(26, 11, 11) );
     cursor: pointer;
     display: flex;
     position: absolute;
@@ -13,8 +13,8 @@
     color: rgb(255, 222, 222);
     font-size: 55px;
     box-sizing: border-box;
-    border: 1px solid #D65DB1;
-    border-bottom: 0px;
+    border: 1px solid yellow;
+
     
 
     transform-origin: left top; /* Ustaw punkt transformacji na lewy górny róg */
@@ -25,3 +25,32 @@
     transition: 0.0s ease-in-out;
 
 }
+
+
+
+  .cart-menu {
+    width: 50%;
+    height: 80px;
+    display: flex;
+    justify-content: space-between; /* Rozkłada przyciski z równym odstępem */
+
+    position: absolute;
+    bottom: 0px;
+  }
+  
+  .cart-menu button {
+    outline: none;
+    border: none;
+    position: relative;
+    box-sizing: border-box;
+    width: 70px;
+    height: 70px;
+    background-color: rgba(240, 248, 255, 0);
+    border: 1px solid;
+    border-radius: 50%;
+    color: rgb(246, 235, 154);
+    border-color: rgb(187, 174, 22);
+
+  }
+
+  

@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 // import {TiChevronLeftOutline, TiChevronRightOutline} from 'https://cdn.skypack.dev/react-icons/ti';
 import "../cart/cart.css";
-
+import { FaPlus, FaTrash, FaEdit, FaHornbill } from 'react-icons/fa';
 
 export function Cart( { eng = "QUITE", pl = "CAŁKIEM", 
                         perspective = "1200px", 
@@ -109,6 +109,12 @@ export function Cart( { eng = "QUITE", pl = "CAŁKIEM",
         >
 
             <span> {word} </span>
+            <div className="cart-menu">
+        <button><FaTrash size={30}/></button>
+        <button><FaEdit size={30}/></button>
+
+
+      </div>
         </div>
     );
 }

@@ -1,7 +1,10 @@
 import { useRef, useState } from 'react';
 import React from 'react';
 import './App.scss'; 
-import { FaPlus, FaTrash, FaEdit } from 'react-icons/fa';
+import { FaPlus, FaTrash, FaEdit, FaHornbill } from 'react-icons/fa';
+
+import { FiEdit2 } from "react-icons/fi";
+
 import { Cart } from './components/cart/cart';
 
 function App() {
@@ -72,8 +75,15 @@ function App() {
 
   return (
     <div className="App">
-      <div className="reverse-button">
-        <button>REVERSE</button>
+      <div className="title">
+
+        <div className='logo'>
+          <FaHornbill />
+        </div>
+
+        <span>
+          Flashcards
+        </span>
       </div>
 
       <div className="cart-container-app">
@@ -81,10 +91,9 @@ function App() {
       </div>
 
       <div className="menu">
-        <button><FaTrash size={25}/></button>
-        <button><FaEdit size={25}/></button>
-        <button><FaPlus size={25}/></button>
 
+        <button><FiEdit2 size={25}/></button>
+        <button><FaPlus size={25}/></button>
       </div>
 
     </div>
