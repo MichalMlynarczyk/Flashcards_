@@ -1,0 +1,27 @@
+.cart-container{
+    width: 100%;
+    height: 70vh;
+    background: linear-gradient(to top right , #FF6F91, #FF9671, #FFC75F);
+    cursor: pointer;
+    display: flex;
+    position: absolute;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    font-family: Inconsolata;
+    font-weight: 800;
+    color: rgb(255, 222, 222);
+    font-size: 55px;
+    box-sizing: border-box;
+    border: 1px solid #D65DB1;
+    border-bottom: 0px;
+    
+
+    transform-origin: left top; /* Ustaw punkt transformacji na lewy górny róg */
+    transform: 
+     rotate(calc(var(--rotate)*-1deg))
+                translateX(calc(var(--transformX)*1px))
+                translateY(calc(var(--transformY)*1px));
+    transition: 0.1s ease-in-out;
+
+}
