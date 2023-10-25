@@ -3,7 +3,7 @@
     height: 80%;
     background: linear-gradient(to top right , rgb(77, 75, 41), rgb(26, 11, 11) );
     cursor: pointer;
-    display: flex;
+    display: var(--display);
     position: absolute;
     text-align: center;
     align-items: center;
@@ -51,6 +51,63 @@
     color: rgb(246, 235, 154);
     border-color: rgb(187, 174, 22);
 
+    transition: color 4s linear;
+
   }
 
-  
+  .cart-menu button svg{
+    transition: text-shadow 1s linear;
+    transition: filter 0.5s ease-in-out;
+  }
+
+  .cart-menu button:hover {
+    color: rgb(211, 193, 58);
+    transition: color 0s ease-in-out;
+  }
+
+  .cart-menu button:hover svg{
+    filter: drop-shadow(0 0 10px #f39c12); 
+    transition: filter 0.5s ease-in-out;
+  }
+
+
+  .delete-dialog{
+    overflow: hidden;
+    border: none;
+    outline: none;
+    border-width: 0px;
+    padding: none;
+    margin: none;
+    box-sizing: border-box;
+    width: 100%;
+    /* z-index: 1100; */
+    /* height: 50px; */
+    background-color: #ffd300;
+    box-shadow: 0 0 40px #ffd300; 
+    border-radius: 10px;
+    z-index: 100;
+    /* display: inline-block; */
+    font-family: Inconsolata;
+    font-weight: 600;
+    font-size: 25px;
+
+  }
+
+
+
+
+  .delete-dialog::backdrop{
+    background-color: rgba(25, 20, 20, 0.739);
+  }
+
+  .dialog-btn{
+    font-family: Inconsolata;
+    font-weight: 800;
+    font-size: 25px;
+    border: none;
+    width: 48%;
+    background-color: #04DAF6;
+    margin-top: 20px;
+    padding: 10px; 
+  }
+ 

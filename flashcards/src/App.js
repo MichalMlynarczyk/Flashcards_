@@ -8,7 +8,8 @@ import { FiEdit2 } from "react-icons/fi";
 import { Cart } from './components/cart/cart';
 
 function App() {
-  const tab = [
+
+  const [tab, setTab] = useState([
     ["QUITE", "CAŁKIEM"],
     ["ACTIVE", "AKTYWNY"],
     ["HANDED", "WRĘCZYĆ"],
@@ -18,7 +19,7 @@ function App() {
     ["QUITE", "CAŁKIEM"],
     ["ACTIVE", "AKTYWNY"],
     ["HANDED", "WRĘCZYĆ"]
-  ];
+  ]);
 
   const [referencePoint, setReferencePoint] = useState(0);
   const [rotate, setRotate] = useState(0);
@@ -61,11 +62,19 @@ function App() {
 
     for (let i=0; i<tab.length; i++){
       flaschcardsArray.push(
-          <Cart zindex={i} eng ={tab[i][0]} pl = {tab[i][1]}/>
+          <Cart zindex={i} eng ={tab[i][0]} pl = {tab[i][1]} method={deleteFlashcards}/>
       )
     }
 
     return flaschcardsArray;
+  }
+
+  const deleteFlashcards = (index) => {
+
+    const newTab = tab.filter((_, i) => i !== index);
+    setTab(newTab);
+    console.log("newTab: " + newTab);
+
   }
 
   function reverseCart(){
@@ -75,6 +84,10 @@ function App() {
 
   return (
     <div className="App">
+
+      <div className='background-logo'>
+        <FaHornbill size={100}/>
+      </div>
       <div className="title">
 
         <div className='logo'>
