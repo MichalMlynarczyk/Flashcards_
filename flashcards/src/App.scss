@@ -131,10 +131,53 @@ body{
   100% { transform: rotate(360deg); }
 }
 
+// @media screen and (max-width: 768px) {
+//   /* Dla urządzeń o szerokości ekranu do 768px */
+//   @media (orientation: landscape) {
+//     /* Jeśli ekran jest ułożony poziomo, np. obrócony telefon */
+//     body {
+//       transform: rotate(90deg);
+//         // translateY(-100px); /* Obracamy stronę o 90 stopni (możesz dostosować kąt) */
+//       // transform-origin: left top; /* Ustalamy punkt obrotu na lewym górnym rogu */
+//       // width: 100vh; /* Rozciągamy stronę na całą szerokość widoku */
+//       // height: 100vw; /* Rozciągamy stronę na całą wysokość widoku */
+//       // position: relative;
+//       // width: 100vh;
+//       // height: 100vw;
+//       // position: absolute;
+//       // top: -100vh;
+//       // top: 0;
+//       // left: 0;
+//     }
+//   }
+// }
+
 /* Avoid Chrome to see Safari hack */
 // @supports (-webkit-touch-callout: none) {
 //   body {
 //     /* The hack for Safari */
 //     height: -webkit-fill-available;
+//   }
+// }
+
+
+// @media screen and (min-width: 320px) and (max-width: 767px) and (orientation: landscape) {
+//   html {
+//     transform: rotate(-90deg);
+//     transform-origin: left top;
+//     width: 100vh;
+//     height: 1000px;
+//     overflow-x: hidden;
+//     position: absolute;
+//     top: 100%;
+//     left: 0;
+//   }
+
+//   .body{
+//     height: 1000px;
+//   }
+
+//   .App{
+//     height: 1000px;
 //   }
 // }

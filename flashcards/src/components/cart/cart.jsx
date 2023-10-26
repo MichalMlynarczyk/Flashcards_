@@ -28,7 +28,7 @@ export function Cart( { eng = "QUITE", pl = "CAŁKIEM",
     const [newPl, setNewPl] = useState(pl);
 
     const deleteDialog = useRef(null);
-
+    const editDialog = useRef(null);
 
     // METHOD
 
@@ -138,7 +138,12 @@ export function Cart( { eng = "QUITE", pl = "CAŁKIEM",
                     }}>
                 <FaTrash size={30}/></button>
 
-                <button onClick={(e) => e.stopPropagation()}><FaEdit size={30}/></button>
+                <button onClick={(e) => {
+                    e.stopPropagation();
+                    setListening(false);
+                    editDialog.current.showModal();
+                    }}>
+                <FaEdit size={30}/></button>
             </div>
 
             <dialog className="delete-dialog" ref={deleteDialog}>
@@ -162,21 +167,66 @@ export function Cart( { eng = "QUITE", pl = "CAŁKIEM",
                 </div>
             </dialog>
 
-            <dialog className="edit-dialog">
+            <dialog className="edit-dialog" ref={editDialog}>
+                EDYTUJ FISZKĘ:
+                <div style={{
+                    marginTop: '10px',
+                    marginBottom: '10px',
+                    width: '100%',
+                    height: '2px',
+                    background: 'black',
+                }}>
+
+                </div>
+                <div style={{
+                    with: '100%',
+                    float: 'left',
+                    fontSize: '20px',
+                }}>POLSKA STRONA:</div>
+                
                 <input
-                        className="inp-localization"
+                        style={{textTransform: 'uppercase',}}
+                        className=""
                         type="text"
                         // placeholder="Nazwa lokalizacji"
                         value={newPl}
                         onChange={(e) => setNewPl(e.target.value)}
-                />                
+                />   
+
+                <div style={{
+                    marginTop: '5px',
+                    with: '100%',
+                    float: 'left',
+                    fontSize: '20px',
+                }}>ANGIELSKA STRONA:</div>
+
                 <input
+                    style={{textTransform: 'uppercase',}}
                     className="inp-localization"
                     type="text"
                     // placeholder="Nazwa lokalizacji"
                     value={newEng}
                     onChange={(e) => setNewEng(e.target.value)}
                 />
+
+                <div style={{ justifyContent: 'space-between', 
+                              display: 'flex',
+                              marginTop: '10px' }}>
+                    <button className="dialog-btn"
+                        onClick={() => {
+                           
+                            setListening(true);
+                            editDialog.current.close();
+                        }
+                        }   > 
+                    ANULUJ</button>
+                    <button className="dialog-btn"
+                        onClick={() => {
+                            setListening(true);
+                            editDialog.current.close();
+                        }}
+                    >ZAPISZ</button>
+                </div>
             </dialog>
 
         </div>

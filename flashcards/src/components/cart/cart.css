@@ -82,7 +82,7 @@
     width: 100%;
     /* z-index: 1100; */
     /* height: 50px; */
-    background-color: #ffd300;
+    background-color: #cbb33a;
     box-shadow: 0 0 40px #ffd300; 
     border-radius: 10px;
     z-index: 100;
@@ -107,7 +107,37 @@
     border: none;
     width: 48%;
     background-color: #04DAF6;
-    margin-top: 20px;
+    margin-top: 2i0px;
     padding: 10px; 
+    color: black;
   }
  
+
+  .edit-dialog{
+    overflow: hidden;
+    border: none;
+    outline: none;
+    border-width: 0px;
+    padding: none;
+    margin: none;
+    box-sizing: border-box;
+    width: 100%;
+    /* z-index: 1100; */
+    /* height: 50px; */
+    background-color: #cbb33a;
+    box-shadow: 0 0 40px #ffd300; 
+    border-radius: 10px;
+    z-index: 100;
+    /* display: inline-block; */
+    font-family: Inconsolata;
+    font-weight: 600;
+    font-size: 25px;
+  }
+
+  .edit-dialog input{
+    margin-top: 5px;
+    outline: none;
+    font-family: Inconsolata;
+    font-weight: 600;
+    font-size: 25px;
+  }
