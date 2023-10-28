@@ -11,10 +11,13 @@ export function Cart( { eng = "QUITE", pl = "CAŁKIEM",
                         zindex = -1,
                         flashcards,
                         blur = "2px",
-                        method } ){
+                        method,
+                        reverse,
+                        edit,
+                        state } ){
 
     // VARIABLES
-    const [word, setWord] = useState(pl);
+    const [word, setWord] = useState(reverse ? pl : eng);
     const [referencePoint, setReferencePoint] = useState(0);
     const [referencePointY, setReferencePointY] = useState(0);
     const [rotate, setRotate] = useState(0);
@@ -24,14 +27,35 @@ export function Cart( { eng = "QUITE", pl = "CAŁKIEM",
     const [display, setDisplay] = useState('flex');
     const [listening, setListening] = useState(true);
 
+    const [currentPl, setCurrentPl] = useState(pl);
+    const [currentEng, setCurrentEng] = useState(eng);
+
     const [newEng, setNewEng] = useState(eng);
     const [newPl, setNewPl] = useState(pl);
 
     const deleteDialog = useRef(null);
     const editDialog = useRef(null);
 
-    // METHOD
 
+
+    // METHOD
+    useEffect(() => {
+        setCurrentEng(newEng.toUpperCase());
+        setCurrentPl(newPl.toUpperCase());
+    }, [newEng, newPl])
+
+    useEffect(() => {
+        setWord(eng);
+        setCurrentEng(eng);
+        setCurrentPl(pl);
+        setNewEng(eng);
+        setNewPl(pl);
+    }, [pl])
+
+    useEffect(() => {
+        setWord(reverse ? pl : eng);
+        setDisplay('flex');
+    }, [reverse])
 
     
     // RETURN STATEMENT
@@ -41,7 +65,7 @@ export function Cart( { eng = "QUITE", pl = "CAŁKIEM",
 
             onClick={() => { 
                 // reverse cart
-                setWord(word === pl ? eng : pl);
+                setWord(word === currentPl ? currentEng : currentPl);
             }}
 
             onTouchStart={(e) => {
@@ -72,6 +96,7 @@ export function Cart( { eng = "QUITE", pl = "CAŁKIEM",
                     else if(rotate < -100){
                         setDisplay('none');
                         setRotate(0);
+                        state(zindex);
                     }
 
                     setTransformX(0);
@@ -108,6 +133,7 @@ export function Cart( { eng = "QUITE", pl = "CAŁKIEM",
                     else if(rotate < -100){
                         setDisplay('none');
                         setRotate(0);
+                        state(zindex);
                     }
 
                     setTransformX(0);
@@ -154,7 +180,6 @@ export function Cart( { eng = "QUITE", pl = "CAŁKIEM",
                             method(zindex);
                             setListening(true);
                             deleteDialog.current.close();
-                            console.log("zindex: " + zindex);
                         }
                         }   > 
                     TAK</button>
@@ -202,7 +227,7 @@ export function Cart( { eng = "QUITE", pl = "CAŁKIEM",
 
                 <input
                     style={{textTransform: 'uppercase',}}
-                    className="inp-localization"
+                    className=""
                     type="text"
                     // placeholder="Nazwa lokalizacji"
                     value={newEng}
@@ -222,8 +247,11 @@ export function Cart( { eng = "QUITE", pl = "CAŁKIEM",
                     ANULUJ</button>
                     <button className="dialog-btn"
                         onClick={() => {
+                            
                             setListening(true);
+                            edit(zindex, newPl, newEng);
                             editDialog.current.close();
+                            
                         }}
                     >ZAPISZ</button>
                 </div>
