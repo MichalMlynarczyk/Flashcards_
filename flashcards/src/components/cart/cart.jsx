@@ -143,6 +143,19 @@ export function Cart( { eng = "QUITE", pl = "CAŁKIEM",
                 }
             }}
 
+            onMouseLeave={(e) => {
+
+                if(isDragging){
+                    setDisplay('none');
+                    setRotate(0);
+                    // state(zindex);
+                    setTransformX(0);
+                    setTransformY(0);
+                    setRotate(0); 
+                    setIsDragging(false);
+                }
+            }}
+
             style={{
                 '--test' : 'red',
                 '--scale' : scale,

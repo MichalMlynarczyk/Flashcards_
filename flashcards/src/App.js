@@ -60,7 +60,7 @@ function App() {
   }
 
   const deleteFlashcards = (index) => {
-    saveState(index-1);
+    saveState(index);
     const newTab = tab.filter((_, i) => i !== index);
     setTab(newTab);
 
@@ -92,6 +92,15 @@ function App() {
       </div>
 
       <div className="cart-container-app">
+        <div style={{width: '100%', height: '70px', display: 'flex', 
+          justifyContent: 'center', alignItems: 'center', marginTop: '40px',
+          cursor: 'pointer', zIndex: '0'}}>
+          <button className='restart-btn'
+            onClick={ () => {
+              saveState(tab.length);
+            }}
+            >ROZPOCZNIJ OD NOWA</button>
+        </div>
         { renderFlashcards() }
       </div>
 
@@ -169,7 +178,7 @@ function App() {
                                 flashtab.push([tab[i][0], tab[i][1]]);
                               }
                               else if (i == state){
-                                flashtab.push([newPl, newEng]);
+                                flashtab.push([newPl.toUpperCase(), newEng.toUpperCase()]);
                               }
                               else if (i > state){
                                 flashtab.push([tab[i-1][0], tab[i-1][1]]);
