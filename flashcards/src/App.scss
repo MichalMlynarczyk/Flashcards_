@@ -14,14 +14,13 @@ body{
 
   margin: 0px;
   padding: 0px;
-  background-color:#32322c;
-
+  background-color:black;
   
   // overscroll-behavior-y: none;
   // overscroll-behavior-x: none;
   // position: fixed;
 
-  // overflow-x: var(--visibility);
+  overflow-x: hidden;
   // overflow: var(--visibility);
 
   // overflow-x: hidden;
@@ -34,7 +33,7 @@ body{
 .App{
   user-select: none;
   width: 100%;
-  height: 100svh;
+  height: 100%;
   // background-color: #f9f97186;
   background-color: #32322c;
   font-family: Inconsolata;

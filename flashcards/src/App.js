@@ -3,7 +3,7 @@ import React from 'react';
 import './App.scss'; 
 import { FaPlus, FaTrash, FaEdit, FaHornbill, FaExchangeAlt } from 'react-icons/fa';
 import '../src/homepage.css';
-
+import AppPhoto from "../src/app.png";
 
 import { Cart } from './components/cart/cart';
 
@@ -85,8 +85,13 @@ function App() {
       <style>
         {`
           body {
-            overflow: ${page ? 'visible' : 'hidden'};
+            overflow-y: ${page ? 'visible' : 'hidden'};
             position: ${page ? 'absolute' : 'fixed'};
+          
+          }
+
+          .App{
+            background-color: ${page ? 'black' : '#32322c'}
           }
         `}
       </style>
@@ -109,6 +114,16 @@ function App() {
               setPage(false);
             }}>WYPRÓBUJ!</button>
           </div>
+
+          
+
+<div style={{padding: '18px', fontSize: '30px'}}>
+Flashcards to aplikacja edukacyjna, która umożliwia użytkownikom skuteczne uczenie się i zapamiętywanie informacji przy użyciu elektronicznych wersji karteczek na urządzeniach mobilnych, takich jak smartfony i tablety. Ta aplikacja jest wyjątkowo przydatna dla studentów, uczniów, oraz każdej osoby, która pragnie usprawnić swoją naukę i pamięć.
+</div>
+
+<div style={{width: '100%', display: 'flex', justifyContent: 'center'}}>
+<img style={{width: '70%'}}src={AppPhoto}></img>
+</div>
 
           <div className='sign-in'>
             <div style={{fontSize: '25px'}}>LOGOWANIE: </div>
