@@ -14,12 +14,19 @@ body{
 
   margin: 0px;
   padding: 0px;
+  background-color:#32322c;
 
-  overflow-x: hidden;
-  overscroll-behavior-y: none;
-  overscroll-behavior-x: none;
-    position: fixed;
-  overflow: hidden;
+  
+  // overscroll-behavior-y: none;
+  // overscroll-behavior-x: none;
+  // position: fixed;
+
+  // overflow-x: var(--visibility);
+  // overflow: var(--visibility);
+
+  // overflow-x: hidden;
+  // overflow: hidden;
+
 
   // white-space: nowrap;
 }
@@ -32,8 +39,8 @@ body{
   background-color: #32322c;
   font-family: Inconsolata;
   font-weight: 600;
-  overflow-x: hidden;
-  overflow-y: hidden;
+  // overflow-x: hidden;
+  // overflow-y: hidden;
   // min-height: 400px;
 }
 

@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import React from 'react';
 import './App.scss'; 
 import { FaPlus, FaTrash, FaEdit, FaHornbill, FaExchangeAlt } from 'react-icons/fa';
-
+import '../src/homepage.css';
 
 
 import { Cart } from './components/cart/cart';
@@ -31,6 +31,10 @@ function App() {
   const [newEng, setNewEng] = useState("");
 
   const addCartDialog = useRef(null);
+
+  const [page, setPage] = useState(true);
+  // 0 -> homepage
+  // 1 -> dla użytkownika
 
 
   const [state, saveState] = useState(tab.length); // zapisz stan, tak aby po zmianie danych
@@ -63,7 +67,6 @@ function App() {
     saveState(index);
     const newTab = tab.filter((_, i) => i !== index);
     setTab(newTab);
-
   }
 
   const editFlashcards = (index, plFlash, engFlash) => {
@@ -75,125 +78,203 @@ function App() {
   }
 
   return (
-    <div className="App">
 
-      <div className='background-logo'>
-        <FaHornbill size={100}/>
-      </div>
-      <div className="title">
+  
+    <div className='App'>
 
-        <div className='logo'>
-          <FaHornbill />
+      <style>
+        {`
+          body {
+            overflow: ${page ? 'visible' : 'hidden'};
+            position: ${page ? 'absolute' : 'fixed'};
+          }
+        `}
+      </style>
+
+      { page ? ( 
+      <>
+
+        <div className="title">
+          <div className='logo'> <FaHornbill /> </div>
+          <span>Flashcards</span>
         </div>
 
-        <span>
-          Flashcards
-        </span>
-      </div>
+        <div className='background-logo' style={{opacity: '0.2', zIndex: '-1'}}> <FaHornbill size={100}/> </div>
 
-      <div className="cart-container-app">
-        <div style={{width: '100%', height: '70px', display: 'flex', 
-          justifyContent: 'center', alignItems: 'center', marginTop: '40px',
-          cursor: 'pointer', zIndex: '0'}}>
-          <button className='restart-btn'
-            onClick={ () => {
-              saveState(tab.length);
+        <div className='homepage-container'>
+
+          <div className='web-test'>
+            <button onClick={() => {
+              console.log("click");
+              setPage(false);
+            }}>WYPRÓBUJ!</button>
+          </div>
+
+          <div className='sign-in'>
+            <div style={{fontSize: '25px'}}>LOGOWANIE: </div>
+
+            <div style={{
+                      marginTop: '10px',
+                      marginBottom: '10px',
+                      width: '100%',
+                      height: '2px',
+                      background: 'black',
+            }}></div>
+
+            Email address
+            <br></br>
+            <input 
+              type='text'
+            />
+            Hasło
+            <input 
+              type='text'
+            />
+
+            <button>ZALOGUJ SIĘ</button>
+          </div>
+
+          <div className='sign-up'>
+            <div style={{fontSize: '25px'}}>REJESTRACJA: </div>
+
+            <div style={{
+                      marginTop: '10px',
+                      marginBottom: '10px',
+                      width: '100%',
+                      height: '2px',
+                      background: 'black',
+            }}></div>
+
+            Email address
+            <br></br>
+            <input 
+              type='text'
+            />
+            Hasło
+            <input 
+              type='password'
+            />
+
+            Powtórz hasło
+            <input 
+              type='password'
+            />
+
+            <button>ZAREJESTRUJ SIĘ</button>
+          </div>
+        </div>
+
+      </>
+      ) : (
+      <>
+        <div className='background-logo'> <FaHornbill size={100}/> </div>
+
+        <div className="title">
+          <div className='logo'> <FaHornbill /> </div>
+          <span>Flashcards</span>
+        </div>
+
+        <div className="cart-container-app">
+          <div style={{width: '100%', height: '70px', display: 'flex', 
+            justifyContent: 'center', alignItems: 'center', marginTop: '40px',
+            cursor: 'pointer', zIndex: '0'}}>
+            <button className='restart-btn' onClick={ () => {saveState(tab.length);}}
+              >ROZPOCZNIJ OD NOWA</button>
+          </div>
+          { renderFlashcards() }
+        </div>
+
+        <div className="menu">
+
+          <button
+            onClick={() => {setReverseCart(!reverseCart)}}  
+          ><FaExchangeAlt size={25}/></button>
+          <button
+            onClick={() => {
+              addCartDialog.current.showModal();
             }}
-            >ROZPOCZNIJ OD NOWA</button>
+          ><FaPlus size={25}/></button>
         </div>
-        { renderFlashcards() }
-      </div>
 
-      <div className="menu">
+        <dialog className="edit-dialog" ref={addCartDialog}>
+                  DODAJ FISZKĘ:
+                  <div style={{
+                      marginTop: '10px',
+                      marginBottom: '10px',
+                      width: '100%',
+                      height: '2px',
+                      background: 'black',
+                  }}>
 
-        <button
-          onClick={() => {setReverseCart(!reverseCart)}}  
-        ><FaExchangeAlt size={25}/></button>
-        <button
-          onClick={() => {
-            addCartDialog.current.showModal();
-          }}
-        ><FaPlus size={25}/></button>
-      </div>
+                  </div>
+                  <div style={{
+                      with: '100%',
+                      float: 'left',
+                      fontSize: '20px',
+                  }}>POLSKA STRONA:</div>
+                  
+                  <input
+                          style={{textTransform: 'uppercase',}}
+                          className=""
+                          type="text"
+                          // placeholder="Nazwa lokalizacji"
+                          value={newPl}
+                          onChange={(e) => setNewPl(e.target.value)}
+                  />   
 
-      <dialog className="edit-dialog" ref={addCartDialog}>
-                DODAJ FISZKĘ:
-                <div style={{
-                    marginTop: '10px',
-                    marginBottom: '10px',
-                    width: '100%',
-                    height: '2px',
-                    background: 'black',
-                }}>
+                  <div style={{
+                      marginTop: '5px',
+                      with: '100%',
+                      float: 'left',
+                      fontSize: '20px',
+                  }}>ANGIELSKA STRONA:</div>
 
-                </div>
-                <div style={{
-                    with: '100%',
-                    float: 'left',
-                    fontSize: '20px',
-                }}>POLSKA STRONA:</div>
-                
-                <input
-                        style={{textTransform: 'uppercase',}}
-                        className=""
-                        type="text"
-                        // placeholder="Nazwa lokalizacji"
-                        value={newPl}
-                        onChange={(e) => setNewPl(e.target.value)}
-                />   
+                  <input
+                      style={{textTransform: 'uppercase',}}
+                      className=""
+                      type="text"
+                      // placeholder="Nazwa lokalizacji"
+                      value={newEng}
+                      onChange={(e) => setNewEng(e.target.value)}
+                  />
 
-                <div style={{
-                    marginTop: '5px',
-                    with: '100%',
-                    float: 'left',
-                    fontSize: '20px',
-                }}>ANGIELSKA STRONA:</div>
-
-                <input
-                    style={{textTransform: 'uppercase',}}
-                    className=""
-                    type="text"
-                    // placeholder="Nazwa lokalizacji"
-                    value={newEng}
-                    onChange={(e) => setNewEng(e.target.value)}
-                />
-
-                <div style={{ justifyContent: 'space-between', 
-                              display: 'flex',
-                              marginTop: '10px' }}>
-                    <button className="dialog-btn"
-                        onClick={() => {
-                           
-           
-                          addCartDialog.current.close();
-                        }
-                        }   > 
-                    ANULUJ</button>
-                    <button className="dialog-btn"
-                        onClick={() => {
-                          const flashtab = [];
-                          for(let i=0; i<tab.length+1; i++ )
-                          {
-                            if (i < state){
-                                flashtab.push([tab[i][0], tab[i][1]]);
-                              }
-                              else if (i == state){
-                                flashtab.push([newPl.toUpperCase(), newEng.toUpperCase()]);
-                              }
-                              else if (i > state){
-                                flashtab.push([tab[i-1][0], tab[i-1][1]]);
-                              }
+                  <div style={{ justifyContent: 'space-between', 
+                                display: 'flex',
+                                marginTop: '10px' }}>
+                      <button className="dialog-btn"
+                          onClick={() => {
+                            
+            
+                            addCartDialog.current.close();
                           }
-                          setTab(flashtab);
-                          addCartDialog.current.close();
-                          setNewEng("");
-                          setNewPl("");
-                          saveState(state+1);
-                        }}
-                    >ZAPISZ</button>
-                </div>
-            </dialog>
-
+                          }   > 
+                      ANULUJ</button>
+                      <button className="dialog-btn"
+                          onClick={() => {
+                            const flashtab = [];
+                            for(let i=0; i<tab.length+1; i++ )
+                            {
+                              if (i < state){
+                                  flashtab.push([tab[i][0], tab[i][1]]);
+                                }
+                                else if (i == state){
+                                  flashtab.push([newPl.toUpperCase(), newEng.toUpperCase()]);
+                                }
+                                else if (i > state){
+                                  flashtab.push([tab[i-1][0], tab[i-1][1]]);
+                                }
+                            }
+                            setTab(flashtab);
+                            addCartDialog.current.close();
+                            setNewEng("");
+                            setNewPl("");
+                            saveState(state+1);
+                          }}
+                      >ZAPISZ</button>
+                  </div>
+        </dialog>
+      </>
+    )}
     </div>
   );
 }
