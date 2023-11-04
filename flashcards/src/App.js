@@ -1,10 +1,10 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import React from 'react';
 import './App.scss'; 
-import { FaPlus, FaTrash, FaEdit, FaHornbill, FaExchangeAlt } from 'react-icons/fa';
+import { FaPlus, FaTrash, FaEdit, FaHornbill, FaExchangeAlt, FaSignOutAlt } from 'react-icons/fa';
 import '../src/homepage.css';
 import AppPhoto from "../src/app.png";
-
+import Cookies from 'js-cookie';
 import { Cart } from './components/cart/cart';
 
 function App() {
@@ -41,6 +41,7 @@ function App() {
   const [dialogText, setDialogText] = useState();
 
   const addCartDialog = useRef(null);
+  const signout = useRef(null);
 
   const [page, setPage] = useState(true);
   // 0 -> homepage
@@ -169,6 +170,8 @@ console.log("dffd: " + state);
 
   const downloadFlashcard = async () => {
     if(await getFlashcardsFromServer(email, password)){
+      setCookieEmail(email);
+      setCookiePassword(password);
       // setPage(false);
       // setTab(data);
     } else {
@@ -225,6 +228,24 @@ console.log("dffd: " + state);
         console.log("Błąd: ", error);
       });
   }
+
+  const setCookieEmail = (email) => {
+    Cookies.set('myCookieEmail', email, {expires: 1});
+  }
+
+  const setCookiePassword = (password) => {
+    Cookies.set('myCookiePassword', password, {expires: 1});
+  }
+
+  useEffect(() => {
+
+
+
+    setEmail(Cookies.get('myCookieEmail'));
+    setPassword(Cookies.get('myCookiePassword'));
+    // Ten efekt zostanie wykonany tylko raz, po zamontowaniu komponentu.
+    // Umieść tutaj kod, który ma być wykonany tylko raz.
+  }, []);
 
   return (
 
@@ -354,6 +375,9 @@ Flashcards to aplikacja edukacyjna, która umożliwia użytkownikom skuteczne uc
               setEmail(registrationEmail);
               setPassword(registrationPassword);
 
+              setCookieEmail(registrationEmail);
+              setCookiePassword(registrationPassword);
+
               setPage(false);
               const newTab = [];
               setTab(newTab);
@@ -401,6 +425,13 @@ Flashcards to aplikacja edukacyjna, która umożliwia użytkownikom skuteczne uc
         <div className="title">
           <div className='logo'> <FaHornbill /> </div>
           <span>Flashcards</span>
+          <button className='logo-button'>
+            <div className='logo_' onClick={() => {
+              signout.current.showModal();
+            }}> 
+            <FaSignOutAlt size={28}/> 
+            </div></button>
+          
         </div>
 
         <div className="cart-container-app">
@@ -507,6 +538,29 @@ Flashcards to aplikacja edukacyjna, która umożliwia użytkownikom skuteczne uc
                           }}
                       >ZAPISZ</button>
                   </div>
+        </dialog>
+
+        <dialog className="delete-dialog" ref={signout}>
+                Czy na pewno chcesz się wylogować ? 
+                <div style={{ justifyContent: 'space-between', display: 'flex' }}>
+                    <button className="dialog-btn"
+                        onClick={() => {
+                           setPage(true);
+                           setEmail("");
+                           setPassword("");
+                           console.log("test");
+
+                            signout.current.close();
+                        }
+                        }   > 
+                    TAK</button>
+                    <button className="dialog-btn"
+                        onClick={() => {
+     
+                            signout.current.close();
+                        }}
+                    >NIE</button>
+                </div>
         </dialog>
       </>
     )}
