@@ -17,7 +17,7 @@ body{
   background-color:black;
   
   // overscroll-behavior-y: none;
-  // overscroll-behavior-x: none;
+  overscroll-behavior-x: none;
   // position: fixed;
 
   overflow-x: hidden;
@@ -33,12 +33,12 @@ body{
 .App{
   user-select: none;
   width: 100%;
-  height: 100%;
+  // height: 100svh;
   // background-color: #f9f97186;
   background-color: #32322c;
   font-family: Inconsolata;
   font-weight: 600;
-  // overflow-x: hidden;
+  overflow-x: hidden;
   // overflow-y: hidden;
   // min-height: 400px;
 }

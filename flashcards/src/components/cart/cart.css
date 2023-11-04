@@ -104,6 +104,7 @@
   }
 
   .dialog-btn{
+    margin-top: 10px;
     font-family: Inconsolata;
     font-weight: 800;
     font-size: 25px;

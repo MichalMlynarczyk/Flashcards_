@@ -30,6 +30,16 @@ function App() {
   const [newPl, setNewPl] = useState("");
   const [newEng, setNewEng] = useState("");
 
+  // LOGOWANIE / REJESTRACJA
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const signin = useRef(null);
+  const [registrationEmail, setRegistrationEmail] = useState("");
+  const [registrationPassword, setRegistrationPassword] = useState("");
+  const [repeatRegistrationPassword, setRepeatRegistrationPassword] = useState("");
+  const registration = useRef(null);
+  const [dialogText, setDialogText] = useState();
+
   const addCartDialog = useRef(null);
 
   const [page, setPage] = useState(true);
@@ -37,7 +47,7 @@ function App() {
   // 1 -> dla użytkownika
 
 
-  const [state, saveState] = useState(tab.length); // zapisz stan, tak aby po zmianie danych
+  const [state, saveState] = useState(0); // zapisz stan, tak aby po zmianie danych
   // aplikacja wróciła do momentu na którym użytkownik skończył
 
   const setState = (index) => {
@@ -50,7 +60,7 @@ function App() {
     const flaschcardsArray = [];
 
     for (let i=0; i<tab.length; i++){
-
+console.log("dffd: " + state);
       
 
       if (i < state){
@@ -63,7 +73,11 @@ function App() {
     return flaschcardsArray;
   }
 
-  const deleteFlashcards = (index) => {
+  const deleteFlashcards = async (index) => {
+    if (page == false){
+      console.log("INDEX: " + index);
+      await deleteFlashcardsFromServer(index+1);
+    }
     saveState(index);
     const newTab = tab.filter((_, i) => i !== index);
     setTab(newTab);
@@ -75,6 +89,141 @@ function App() {
     newFlashcards[index][0] = engFlash.toUpperCase();
     newFlashcards[index][1] = plFlash.toUpperCase();
     setTab(newFlashcards);
+
+    if (page == false){
+      const SERVER_URL = "http://localhost:8080/editFlashcards";
+      const REQUEST_BODY = JSON.stringify({index: index+1, eng: engFlash, pl: plFlash, tableName: email});
+      const REQUEST = {method: 'POST',headers: {'Content-Type': 'application/json',},
+        body: REQUEST_BODY, // Przesunięcie body do obiektu REQUEST
+      };
+    
+      return fetch(SERVER_URL, REQUEST)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json(); // Przetwarzanie odpowiedzi jako JSON
+        })
+        .then((data) => {
+        })
+        .catch((error) => {
+          console.log("Błąd: ", error);
+        });
+    }
+  }
+
+  
+
+  const deleteFlashcardsFromServer = (index) =>{
+    const SERVER_URL = "http://localhost:8080/deleteFlashcards";
+    const REQUEST_BODY = JSON.stringify({index: index, tableName: email});
+    const REQUEST = {method: 'POST',headers: {'Content-Type': 'application/json',},
+      body: REQUEST_BODY, // Przesunięcie body do obiektu REQUEST
+    };
+  
+    return fetch(SERVER_URL, REQUEST)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json(); // Przetwarzanie odpowiedzi jako JSON
+      })
+      .then((data) => {
+      })
+      .catch((error) => {
+        console.log("Błąd: ", error);
+      });
+  }
+
+  const getFlashcardsFromServer = (email, password) => {
+    const SERVER_URL = "http://localhost:8080/getData";
+    const REQUEST_BODY = JSON.stringify({email: email, password: password});
+    const REQUEST = {method: 'POST',headers: {'Content-Type': 'application/json',},
+      body: REQUEST_BODY, // Przesunięcie body do obiektu REQUEST
+    };
+  
+    return fetch(SERVER_URL, REQUEST)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json(); // Przetwarzanie odpowiedzi jako JSON
+      })
+      .then((data) => {
+        console.log(data);
+        if (data != "false"){
+          setPage(false);
+          saveState(data.length);
+          setTab(data);
+          
+          return true;
+        }
+        else{
+          return false;
+        }
+      })
+      .catch((error) => {
+        console.log("Błąd: ", error);
+      });
+  };
+
+  const downloadFlashcard = async () => {
+    if(await getFlashcardsFromServer(email, password)){
+      // setPage(false);
+      // setTab(data);
+    } else {
+      signin.current.showModal();
+    }
+
+  }
+
+  const addFlashcards = (index, pl, eng, tableName) => {
+    const SERVER_URL = "http://localhost:8080/addFlashcards";
+    const REQUEST_BODY = JSON.stringify({index: index, pl: pl, eng: eng, tableName: tableName});
+    const REQUEST = {method: 'POST',headers: {'Content-Type': 'application/json',},
+      body: REQUEST_BODY, // Przesunięcie body do obiektu REQUEST
+    };
+  
+    return fetch(SERVER_URL, REQUEST)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json(); // Przetwarzanie odpowiedzi jako JSON
+      })
+      .then((data) => {
+      })
+      .catch((error) => {
+        console.log("Błąd: ", error);
+      });
+  }
+
+  const createUser = () => {
+    const SERVER_URL = "http://localhost:8080/createUser";
+    const REQUEST_BODY = JSON.stringify({email: registrationEmail, password: registrationPassword});
+    const REQUEST = {method: 'POST',headers: {'Content-Type': 'application/json',},
+      body: REQUEST_BODY, // Przesunięcie body do obiektu REQUEST
+    };
+  
+    return fetch(SERVER_URL, REQUEST)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json(); // Przetwarzanie odpowiedzi jako JSON
+      })
+      .then((data) => {
+        console.log(data);
+        if (data != "false"){
+          return true;
+        }
+        else{
+          return false;
+        }
+      })
+      .catch((error) => {
+        console.log("Błąd: ", error);
+      });
   }
 
   return (
@@ -91,7 +240,8 @@ function App() {
           }
 
           .App{
-            background-color: ${page ? 'black' : '#32322c'}
+            background-color: ${page ? 'black' : '#32322c'};
+            height: ${page ? '100%' : '100svh'}
           }
         `}
       </style>
@@ -110,7 +260,9 @@ function App() {
 
           <div className='web-test'>
             <button onClick={() => {
-              console.log("click");
+              
+              getFlashcardsFromServer('defaultwords', 'none', 'staticUser');
+              saveState(tab.length);
               setPage(false);
             }}>WYPRÓBUJ!</button>
           </div>
@@ -136,17 +288,22 @@ Flashcards to aplikacja edukacyjna, która umożliwia użytkownikom skuteczne uc
                       background: 'black',
             }}></div>
 
-            Email address
+            Username
             <br></br>
             <input 
-              type='text'
+              type="text"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+ 
             />
             Hasło
             <input 
-              type='text'
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
 
-            <button>ZALOGUJ SIĘ</button>
+            <button onClick={() => {downloadFlashcard()}}>ZALOGUJ SIĘ</button>
           </div>
 
           <div className='sign-up'>
@@ -160,24 +317,81 @@ Flashcards to aplikacja edukacyjna, która umożliwia użytkownikom skuteczne uc
                       background: 'black',
             }}></div>
 
-            Email address
+            Username
             <br></br>
             <input 
               type='text'
+              value={registrationEmail}
+              onChange={(e) => {setRegistrationEmail(e.target.value)}}
             />
             Hasło
             <input 
               type='password'
+              value={registrationPassword}
+              onChange={(e) => {setRegistrationPassword(e.target.value)}}
             />
 
             Powtórz hasło
             <input 
               type='password'
+              value={repeatRegistrationPassword}
+              onChange={(e) => {setRepeatRegistrationPassword(e.target.value)}}
             />
 
-            <button>ZAREJESTRUJ SIĘ</button>
+            <button onClick={async () => {
+              if (registrationPassword != repeatRegistrationPassword){
+                setDialogText("Hasła się różnią!");
+                registration.current.showModal();
+                return;
+              }
+
+              if(await !createUser()){
+                setDialogText("Taki użytkownik już istnieje!");
+                registration.current.showModal();
+                return;
+              }
+
+              setEmail(registrationEmail);
+              setPassword(registrationPassword);
+
+              setPage(false);
+              const newTab = [];
+              setTab(newTab);
+            }}>ZAREJESTRUJ SIĘ</button>
           </div>
         </div>
+
+        <dialog className="delete-dialog" ref={signin}
+        style={{textAlign: 'center'}}>
+                Błędna nazwa użytkownia lub hasło!
+                <div style={{ justifyContent: 'space-between', display: 'flex', textAlign: 'center' }}>
+                    <button className="dialog-btn"
+                    style={{width: '100%'}}
+                        onClick={() => {
+                            // method(zindex);
+                            // setListening(true);
+                            signin.current.close();
+                        }
+                        }   > 
+                    OK</button>
+                </div>
+        </dialog>
+
+        <dialog className="delete-dialog" ref={registration}
+        style={{textAlign: 'center'}}>
+                {dialogText}
+                <div style={{ justifyContent: 'space-between', display: 'flex', textAlign: 'center' }}>
+                    <button className="dialog-btn"
+                    style={{width: '100%'}}
+                        onClick={() => {
+                            // method(zindex);
+                            // setListening(true);
+                            registration.current.close();
+                        }
+                        }   > 
+                    OK</button>
+                </div>
+        </dialog>
 
       </>
       ) : (
@@ -193,7 +407,7 @@ Flashcards to aplikacja edukacyjna, która umożliwia użytkownikom skuteczne uc
           <div style={{width: '100%', height: '70px', display: 'flex', 
             justifyContent: 'center', alignItems: 'center', marginTop: '40px',
             cursor: 'pointer', zIndex: '0'}}>
-            <button className='restart-btn' onClick={ () => {saveState(tab.length);}}
+            <button className='restart-btn' onClick={ async() => {await getFlashcardsFromServer(email, password); saveState(tab.length); }}
               >ROZPOCZNIJ OD NOWA</button>
           </div>
           { renderFlashcards() }
@@ -265,7 +479,13 @@ Flashcards to aplikacja edukacyjna, która umożliwia użytkownikom skuteczne uc
                           }   > 
                       ANULUJ</button>
                       <button className="dialog-btn"
-                          onClick={() => {
+                          onClick={async () => {
+
+                            if (page == false) {
+                              console.log("STATE: " + state);
+                              await addFlashcards(state+1,newPl.toUpperCase(), newEng.toUpperCase(), email);
+                            }
+
                             const flashtab = [];
                             for(let i=0; i<tab.length+1; i++ )
                             {
