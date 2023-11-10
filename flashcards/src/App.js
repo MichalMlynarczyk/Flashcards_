@@ -92,7 +92,7 @@ console.log("dffd: " + state);
     setTab(newFlashcards);
 
     if (page == false){
-      const SERVER_URL = "http://localhost:8080/editFlashcards";
+      const SERVER_URL = "http://16.171.116.201:8080/editFlashcards";
       const REQUEST_BODY = JSON.stringify({index: index+1, eng: engFlash, pl: plFlash, tableName: email});
       const REQUEST = {method: 'POST',headers: {'Content-Type': 'application/json',},
         body: REQUEST_BODY, // Przesunięcie body do obiektu REQUEST
@@ -116,7 +116,7 @@ console.log("dffd: " + state);
   
 
   const deleteFlashcardsFromServer = (index) =>{
-    const SERVER_URL = "http://localhost:8080/deleteFlashcards";
+    const SERVER_URL = "http://16.171.116.201:8080/deleteFlashcards";
     const REQUEST_BODY = JSON.stringify({index: index, tableName: email});
     const REQUEST = {method: 'POST',headers: {'Content-Type': 'application/json',},
       body: REQUEST_BODY, // Przesunięcie body do obiektu REQUEST
@@ -137,7 +137,7 @@ console.log("dffd: " + state);
   }
 
   const getFlashcardsFromServer = (email, password) => {
-    const SERVER_URL = "http://localhost:8080/getData";
+    const SERVER_URL = "http://16.171.116.201:8080/getData";
     const REQUEST_BODY = JSON.stringify({email: email, password: password});
     const REQUEST = {method: 'POST',headers: {'Content-Type': 'application/json',},
       body: REQUEST_BODY, // Przesunięcie body do obiektu REQUEST
@@ -181,7 +181,7 @@ console.log("dffd: " + state);
   }
 
   const addFlashcards = (index, pl, eng, tableName) => {
-    const SERVER_URL = "http://localhost:8080/addFlashcards";
+    const SERVER_URL = "http://16.171.116.201:8080/addFlashcards";
     const REQUEST_BODY = JSON.stringify({index: index, pl: pl, eng: eng, tableName: tableName});
     const REQUEST = {method: 'POST',headers: {'Content-Type': 'application/json',},
       body: REQUEST_BODY, // Przesunięcie body do obiektu REQUEST
@@ -202,7 +202,7 @@ console.log("dffd: " + state);
   }
 
   const createUser = () => {
-    const SERVER_URL = "http://localhost:8080/createUser";
+    const SERVER_URL = "http://16.171.116.201:8080/createUser";
     const REQUEST_BODY = JSON.stringify({email: registrationEmail, password: registrationPassword});
     const REQUEST = {method: 'POST',headers: {'Content-Type': 'application/json',},
       body: REQUEST_BODY, // Przesunięcie body do obiektu REQUEST
