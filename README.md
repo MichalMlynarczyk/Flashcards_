@@ -1,5 +1,7 @@
 # Flashcards_
 
+http://13.49.46.119:3000/   ----> PODGLĄD
+
 ![image](https://github.com/MichalMlynarczyk/Flashcards_/assets/22431228/5b5108de-20e7-419d-a43e-e28cfa30c08f)
 ![image](https://github.com/MichalMlynarczyk/Flashcards_/assets/22431228/6feeb2d9-d448-47e7-bcc9-bfeb530a171a)
 ![image](https://github.com/MichalMlynarczyk/Flashcards_/assets/22431228/c49ec0c8-d20b-431e-914a-f17cdcd46d7f)
