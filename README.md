@@ -2,8 +2,9 @@
 
 http://13.49.46.119:3000/   ----> PODGLĄD
 
-![image](https://github.com/MichalMlynarczyk/Flashcards_/assets/22431228/5b5108de-20e7-419d-a43e-e28cfa30c08f)
-![image](https://github.com/MichalMlynarczyk/Flashcards_/assets/22431228/6feeb2d9-d448-47e7-bcc9-bfeb530a171a)
-![image](https://github.com/MichalMlynarczyk/Flashcards_/assets/22431228/c49ec0c8-d20b-431e-914a-f17cdcd46d7f)
-![image](https://github.com/MichalMlynarczyk/Flashcards_/assets/22431228/0996d7a2-5295-4c85-af9d-f482477098b8)
-![image](https://github.com/MichalMlynarczyk/Flashcards_/assets/22431228/f5e0990f-9b70-4257-a6e0-4c03df949c89)
+
+![image](https://github.com/MichalMlynarczyk/Flashcards_/assets/22431228/cfd1f63f-0d8f-4e92-9979-f4670ee8cc72)
+![image](https://github.com/MichalMlynarczyk/Flashcards_/assets/22431228/1c2986c1-e9ab-437c-bf5d-f801effa68b1)
+![image](https://github.com/MichalMlynarczyk/Flashcards_/assets/22431228/5ea770a7-3665-4146-9dcc-f901e18e572e)
+![image](https://github.com/MichalMlynarczyk/Flashcards_/assets/22431228/367560db-b448-42af-a1ff-d7d942da4a1f)
+![image](https://github.com/MichalMlynarczyk/Flashcards_/assets/22431228/d07f7835-9056-43bc-ab56-45d61d866a39)
